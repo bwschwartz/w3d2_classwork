@@ -1,4 +1,6 @@
 require_relative 'card'
+require "byebug"
+
 
 class Board
 
@@ -26,16 +28,15 @@ class Board
         indices = (0..3).to_a
 
         num_filled = 0
-        while num_filled > @card_arr.length
-            @card_arr.each do |card|
+        while num_filled < @card_arr.length
+            card = @card_arr[num_filled]
                 row = indices.sample
                 col = indices.sample
                 pos = [row, col]
                 if empty?(pos)
                     self[pos] = card
                     num_filled += 1
-                end
-            end
+                end        
         end
     end
 
@@ -46,6 +47,11 @@ class Board
         end
     end
 
+    def render
+        @grid.each do |row|
+            puts row
 
+        end
+    end
 
 end
