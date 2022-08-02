@@ -30,6 +30,7 @@ class Card
     end
 
     def ==(card)
+        return true if card == " "
         @face_value == card.face_value
     end
 

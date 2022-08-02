@@ -2,9 +2,8 @@ require_relative 'card'
 
 class Board
 
-    def initialize(size)
-        @size = 4
-        @grid = Array.new(@size) {Array.new(@size, " ") }
+    def initialize
+        @grid = Array.new(4) {Array.new(4, " ") }
         @card_arr = []
     end
 
@@ -19,17 +18,24 @@ class Board
     end
 
     def empty?(pos)
-        @grid[pos] == " "
+        self[pos] == " "
     end
 
     def populate
         fill_cards
         indices = (0..3).to_a
-        card_arr.each do |card|
-            row = indices.sample
-            col = indices.sample
-            pos = [row, col]
-            @grid[pos] = card if empty?(pos)
+
+        num_filled = 0
+        while num_filled > @card_arr.length
+            @card_arr.each do |card|
+                row = indices.sample
+                col = indices.sample
+                pos = [row, col]
+                if empty?(pos)
+                    self[pos] = card
+                    num_filled += 1
+                end
+            end
         end
     end
 
@@ -38,7 +44,6 @@ class Board
             pair = Card.make_pair
             @card_arr += pair
         end
-        @card_arr.each { |card| p card.face_value}
     end
 
 
