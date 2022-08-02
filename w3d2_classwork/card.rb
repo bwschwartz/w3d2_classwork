@@ -17,8 +17,12 @@ class Card
     end
 
     def display
-        @face_value if @face_up
-
+        # @face_up ? @face_value :  " "
+        if @face_up
+            @face_value
+        else
+            " "
+        end
     end
 
     def hide

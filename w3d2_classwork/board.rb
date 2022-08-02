@@ -27,16 +27,10 @@ class Board
         fill_cards
         indices = (0..3).to_a
 
-        num_filled = 0
-        while num_filled < @card_arr.length
-            card = @card_arr[num_filled]
-                row = indices.sample
-                col = indices.sample
-                pos = [row, col]
-                if empty?(pos)
-                    self[pos] = card
-                    num_filled += 1
-                end        
+        @grid.map! do |row|
+            row.map! do |slot|
+                @card_arr.shuffle.pop
+            end
         end
     end
 
@@ -48,10 +42,21 @@ class Board
     end
 
     def render
-        @grid.each do |row|
-            puts row
 
+        rendered = @grid.map do |row|
+            row.map do |card|
+                card.display
+            end
+        end
+        puts rendered
+        return
+
+        rendered.each do |row|
+            puts row
         end
     end
 
 end
+
+# b = Board.new
+# b.populate
