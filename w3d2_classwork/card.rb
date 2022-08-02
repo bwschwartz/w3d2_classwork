@@ -1,20 +1,19 @@
 class Card
 
     def self.make_pair
+        pair = []
         alpha = ("a".."z").to_a
-        value = ""
-        3.times { value << alpha.sample }
-        2.times { Card.new(value) }
+        value = alpha.sample + alpha.sample
+        2.times { pair << Card.new(value) }
 
+        pair
     end
 
-    attr_reader :face_value :face_value
+    attr_reader :face_value, :face_up
 
     def initiliaze(face_value)
         @face_value = face_value
         @face_up? = false
-
-
     end
 
     def display
