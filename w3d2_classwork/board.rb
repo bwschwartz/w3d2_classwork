@@ -3,7 +3,7 @@ require_relative 'card'
 class Board
 
     def initiliaze(size)
-        @size = size
+        @size = 4
         @grid = Array.new(@size) {Array.new(@size, " ") }
         @card_arr = []
     end
@@ -20,8 +20,16 @@ class Board
 
     def populate
 
+    end
+
+    def fill_cards
+        while card_arr.length < 16
+            pair = Card.make_pair
+
+        end
 
     end
+
 
 
 end
