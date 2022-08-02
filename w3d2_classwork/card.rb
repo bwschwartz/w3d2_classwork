@@ -9,7 +9,8 @@ class Card
         pair
     end
 
-    attr_reader :face_value, :face_up
+    attr_reader :face_value
+    attr_accessor :face_up
 
     def initialize(face_value)
         @face_value = face_value

@@ -27,9 +27,10 @@ class Board
         fill_cards
         indices = (0..3).to_a
 
+        shuffled = @card_arr.shuffle
         @grid.map! do |row|
             row.map! do |slot|
-                @card_arr.shuffle.pop
+              shuffled.pop
             end
         end
     end
@@ -42,18 +43,30 @@ class Board
     end
 
     def render
-
         rendered = @grid.map do |row|
             row.map do |card|
                 card.display
             end
         end
-        puts rendered
-        return
 
         rendered.each do |row|
-            puts row
+            puts row.join(" ")
         end
+        nil
+    end
+
+    def won?
+        @grid.each do |row|
+            return false if !row.all? { |card| card.face_up}
+        end
+        true
+    end
+
+    def reveal(pos)
+        row, col = pos
+        card = @grid[row][col]
+        card.face_up = true
+        card.face_value
     end
 
 end
